@@ -7,6 +7,7 @@ import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -93,5 +94,16 @@ public class UserServiceTest {
         assertEquals(orderBy, usedQuery.getSortBy());
         assertEquals("descending", usedQuery.getSortOrder());
         assertEquals(attributes, usedQuery.getAttributes());
+    }
+    
+    @Test
+    public void getUser() {
+        String id = "userID";
+        
+        User user = mock(User.class);
+        doReturn(user).when(connector).getUser(eq(id), same(accessToken));
+        
+        User result = toTestSpy.getUser(id);
+        assertEquals(user, result);
     }
 }
