@@ -15,6 +15,7 @@ import org.osiam.resources.scim.SCIMSearchResult;
 import org.osiam.resources.scim.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,7 +48,7 @@ public class UserViewController {
     @Inject
     private UserlistSession session;
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleList(
             @RequestParam(value = REQUEST_PARAMETER_QUERY, required = false) String query,
             @RequestParam(value = REQUEST_PARAMETER_LIMIT, required = false) Integer limit,
@@ -114,7 +115,7 @@ public class UserViewController {
                 .setPath(CONTROLLER_PATH)
                 .addParameter(REQUEST_PARAMETER_QUERY, filterQuery)
                 .addParameter(REQUEST_PARAMETER_LIMIT, session.getLimit())
-                .addParameter(REQUEST_PARAMETER_OFFSET, session.getOffset())
+                .addParameter(REQUEST_PARAMETER_OFFSET, null)
                 .addParameter(REQUEST_PARAMETER_ORDER_BY, session.getOrderBy())
                 .addParameter(REQUEST_PARAMETER_ASCENDING, session.getAscending())
                 .build();
@@ -177,7 +178,7 @@ public class UserViewController {
                 .setPath(CONTROLLER_PATH)
                 .addParameter(REQUEST_PARAMETER_QUERY, session.getQuery())
                 .addParameter(REQUEST_PARAMETER_LIMIT, limit)
-                .addParameter(REQUEST_PARAMETER_OFFSET, session.getOffset())
+                .addParameter(REQUEST_PARAMETER_OFFSET, null)
                 .addParameter(REQUEST_PARAMETER_ORDER_BY, session.getOrderBy())
                 .addParameter(REQUEST_PARAMETER_ASCENDING, session.getAscending())
                 .build();
