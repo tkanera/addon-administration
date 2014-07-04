@@ -59,7 +59,7 @@ public class UserViewController {
 
         ModelAndView modelAndView = new ModelAndView("user/list");
 
-        final String attributes = "userName, name.givenName, name.familyName";
+        final String attributes = "id, userName, name.givenName, name.familyName";
         if (limit == null) {
             limit = DEFAULT_LIMIT;
         }
