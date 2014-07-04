@@ -1,7 +1,6 @@
 package org.osiam.addons.administration.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
@@ -9,8 +8,6 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 
@@ -47,33 +44,6 @@ public class UserServiceTest {
     @InjectMocks
     UserService toTestSpy = new UserService();
 
-    @SuppressWarnings("unchecked")
-    @Test
-    public void searchUser_onlyQuery() {
-        final SCIMSearchResult<User> toReturn = mock(SCIMSearchResult.class);
-        doReturn(toReturn).when(toTestSpy).searchUser(anyString(), anyInt(), anyLong(), anyString(), anyBoolean(), anyString());
-
-        final String query = "TestQuery";
-        final SCIMSearchResult<User> result = toTestSpy.searchUser(query);
-
-        assertSame(result, toReturn);
-        verify(toTestSpy).searchUser(query, null, null, null, null, null);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    public void searchUser_withLimit() {
-        final SCIMSearchResult<User> toReturn = mock(SCIMSearchResult.class);
-        doReturn(toReturn).when(toTestSpy).searchUser(anyString(), anyInt(), anyLong(), anyString(), anyBoolean(), anyString());
-
-        final String query = "TestQuery";
-        final Integer limit = 13;
-        final Long offset = 12L;
-        final SCIMSearchResult<User> result = toTestSpy.searchUser(query, limit, offset);
-
-        assertSame(result, toReturn);
-        verify(toTestSpy).searchUser(query, limit, offset, null, null, null);
-    }
 
     @Test
     public void searchUser_advanced() {
